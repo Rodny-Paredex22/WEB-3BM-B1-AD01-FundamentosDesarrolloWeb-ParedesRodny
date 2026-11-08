@@ -1,0 +1,6 @@
+# Archivos de soporte y documentos (excluidos del repositorio según consigna)
+*.pdf
+*.docx
+*.txt
+*.md
+sin cont/

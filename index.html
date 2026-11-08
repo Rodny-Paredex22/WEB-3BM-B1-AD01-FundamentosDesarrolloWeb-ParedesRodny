@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taller Magna - Mantenimiento Automotriz</title>
+  
+  <!-- ESTILOS, ICONOS FONTAWESOME Y SWEETALERT2 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+
+  <!-- ENCABEZADO Y NAVEGACIÓN (MÓDULO 1) -->
+  <header>
+    <div class="barra-navegacion">
+      <a href="#" class="logo" onclick="mostrarSeccion('seccion-inicio')">
+        <i class="fa-solid fa-gears" style="color: var(--color-acento);"></i>
+        TALLER <span>MAGNA</span>
+      </a>
+
+      <nav class="menu-enlaces">
+        <a id="nav-inicio" class="activo" onclick="mostrarSeccion('seccion-inicio')">
+          <i class="fa-solid fa-house"></i> Inicio
+        </a>
+        <a id="nav-servicios" onclick="mostrarSeccion('seccion-servicios')">
+          <i class="fa-solid fa-wrench"></i> Servicios
+        </a>
+        <a id="nav-nosotros" onclick="mostrarSeccion('seccion-nosotros')">
+          <i class="fa-solid fa-building"></i> Acerca de
+        </a>
+        <a id="nav-solicitud" onclick="mostrarSeccion('seccion-solicitud')">
+          <i class="fa-solid fa-calendar-plus"></i> Solicitar Cita
+        </a>
+        <a id="nav-cliente" class="oculto" onclick="mostrarSeccion('seccion-cliente')">
+          <i class="fa-solid fa-clipboard-list"></i> Mis Mantenimientos
+        </a>
+        <a id="nav-admin" class="oculto" onclick="mostrarSeccion('seccion-admin')">
+          <i class="fa-solid fa-shield-halved"></i> Administración
+        </a>
+        
+        <!-- ESTADO DE SESIÓN -->
+        <a id="btn-login-nav" onclick="mostrarSeccion('seccion-login')">
+          <i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión
+        </a>
+        <span id="usuario-sesion-info" class="oculto">
+          <a onclick="mostrarSeccion('seccion-perfil')" id="nombre-usuario-badge"></a>
+          <button class="btn-limpiar btn-pequeno" onclick="cerrarSesion()">
+            <i class="fa-solid fa-power-off"></i> Salir
+          </button>
+        </span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+
+    <!-- SECCIÓN 1: INICIO -->
+    <section id="seccion-inicio" class="seccion-app">
+      <div class="banner-inicio">
+        <h1>
+          <i class="fa-solid fa-car-side" style="color: var(--color-acento);"></i>
+          Centro de Mantenimiento Automotriz
+        </h1>
+        <p>Servicio mecánico profesional, diagnósticos computarizados y seguimiento de órdenes en línea con precisión técnica.</p>
+        <button class="btn-enviar" onclick="mostrarSeccion('seccion-solicitud')">
+          <i class="fa-solid fa-calendar-check"></i> Agendar Cita Ahora
+        </button>
+      </div>
+
+      <div class="grilla-servicios">
+        <div class="tarjeta-servicio">
+          <div class="icono-tarjeta"><i class="fa-solid fa-oil-can"></i></div>
+          <h3>Mantenimiento Preventivo</h3>
+          <p>Cambio de aceite, filtros y revisión de los puntos vitales del automotor.</p>
+        </div>
+        <div class="tarjeta-servicio">
+          <div class="icono-tarjeta"><i class="fa-solid fa-car-burst"></i></div>
+          <h3>Sistema de Frenos</h3>
+          <p>Mantenimiento y sustitución de pastillas, rectificación y líquido de frenos.</p>
+        </div>
+        <div class="tarjeta-servicio">
+          <div class="icono-tarjeta"><i class="fa-solid fa-microchip"></i></div>
+          <h3>Diagnóstico Electrónico</h3>
+          <p>Escaneo OBD-II completo para detectar fallas electrónicas y de sensores.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: SERVICIOS -->
+    <section id="seccion-servicios" class="seccion-app oculto">
+      <div class="contenedor-seccion">
+        <h2><i class="fa-solid fa-toolbox" style="color: var(--color-acento);"></i> Catálogo de Servicios</h2>
+        <p class="subtitulo">Seleccione el servicio que necesita su vehículo para agendarlo directamente:</p>
+        
+        <div class="grilla-servicios">
+          <div class="tarjeta-servicio">
+            <div class="icono-tarjeta"><i class="fa-solid fa-gauge-high"></i></div>
+            <h3>Mantenimiento Preventivo</h3>
+            <p>Revisión periódica de motor, niveles, filtros y estado de bujías.</p>
+            <button class="btn-limpiar" onclick="seleccionarServicio('Mantenimiento Preventivo')">
+              <i class="fa-solid fa-arrow-right"></i> Seleccionar
+            </button>
+          </div>
+          <div class="tarjeta-servicio">
+            <div class="icono-tarjeta"><i class="fa-solid fa-circle-stop"></i></div>
+            <h3>Sistema de Frenos</h3>
+            <p>Inspección integral de discos, pastillas y líquido hidráulico de frenado.</p>
+            <button class="btn-limpiar" onclick="seleccionarServicio('Sistema de Frenos')">
+              <i class="fa-solid fa-arrow-right"></i> Seleccionar
+            </button>
+          </div>
+          <div class="tarjeta-servicio">
+            <div class="icono-tarjeta"><i class="fa-solid fa-laptop-code"></i></div>
+            <h3>Diagnóstico Computarizado</h3>
+            <p>Lectura técnica con escáner automotriz y borrado de testigos de error.</p>
+            <button class="btn-limpiar" onclick="seleccionarServicio('Diagnóstico Computarizado')">
+              <i class="fa-solid fa-arrow-right"></i> Seleccionar
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: ACERCA DE -->
+    <section id="seccion-nosotros" class="seccion-app oculto">
+      <div class="contenedor-seccion">
+        <h2><i class="fa-solid fa-building" style="color: var(--color-acento);"></i> Acerca de Taller Magna</h2>
+        <p class="subtitulo">Compromiso, transparencia y tecnología en mecánica automotriz.</p>
+        <p>Somos un taller especializado con equipamiento moderno y personal certificado. Brindamos a nuestros clientes una plataforma web para registrar y dar seguimiento al estado de sus vehículos en tiempo real.</p>
+        <p><i class="fa-solid fa-clock" style="color: var(--color-acento);"></i> <strong>Horario de atención:</strong> Lunes a Viernes de 08:00 a 17:00 hs. | Sábados de 08:00 a 13:00 hs.</p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: FORMULARIO DE SOLICITUD (MÓDULO 2) -->
+    <section id="seccion-solicitud" class="seccion-app oculto">
+      <div class="contenedor-seccion">
+        <h2 id="titulo-formulario">
+          <i class="fa-solid fa-file-pen" style="color: var(--color-acento);"></i>
+          Solicitud de Mantenimiento
+        </h2>
+        <p class="subtitulo">Complete los datos del cliente y del vehículo para programar su turno.</p>
+
+        <form id="formulario-solicitud">
+          
+          <!-- DATOS CLIENTE -->
+          <h3><i class="fa-solid fa-user"></i> Datos del Cliente</h3>
+          <div class="fila-formulario">
+            <div class="campo">
+              <label for="cliente-nombre">Nombre Completo *</label>
+              <input type="text" id="cliente-nombre" placeholder="Ej. Juan Pérez" required>
+            </div>
+            <div class="campo">
+              <label for="cliente-email">Correo Electrónico *</label>
+              <input type="email" id="cliente-email" placeholder="juan@correo.com" required>
+            </div>
+            <div class="campo">
+              <label for="cliente-telefono">Teléfono (10 dígitos) *</label>
+              <input type="number" id="cliente-telefono" placeholder="0991234567" required>
+            </div>
+          </div>
+
+          <!-- DATOS AUTO -->
+          <h3><i class="fa-solid fa-car"></i> Datos del Automóvil</h3>
+          <div class="fila-formulario">
+            <div class="campo">
+              <label for="auto-placa">Placa (Ej. ABC-1234) *</label>
+              <input type="text" id="auto-placa" placeholder="ABC-1234" maxlength="8" required>
+            </div>
+            <div class="campo">
+              <label for="auto-marca">Marca *</label>
+              <input type="text" id="auto-marca" placeholder="Ej. Toyota" required>
+            </div>
+            <div class="campo">
+              <label for="auto-modelo">Modelo *</label>
+              <input type="text" id="auto-modelo" placeholder="Ej. Corolla" required>
+            </div>
+            <div class="campo">
+              <label for="auto-anio">Año *</label>
+              <input type="number" id="auto-anio" placeholder="Ej. 2020" min="1990" max="2027" required>
+            </div>
+            <div class="campo">
+              <label for="auto-kilometraje">Kilometraje (km) *</label>
+              <input type="number" id="auto-kilometraje" placeholder="Ej. 45000" min="1" required>
+            </div>
+            <div class="campo">
+              <label for="servicio-tipo">Servicio Requerido *</label>
+              <select id="servicio-tipo" required>
+                <option value="">Seleccione un servicio...</option>
+                <option value="Mantenimiento Preventivo">Mantenimiento Preventivo</option>
+                <option value="Sistema de Frenos">Sistema de Frenos</option>
+                <option value="Diagnóstico Computarizado">Diagnóstico Computarizado</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- MODALIDAD Y ADICIONALES -->
+          <h3><i class="fa-solid fa-list-check"></i> Modalidad y Chequeos Adicionales</h3>
+          <div class="fila-formulario">
+            <div class="campo">
+              <label>Tipo de Atención *</label>
+              <div class="opciones-inline">
+                <label><input type="radio" name="tipoAtencion" value="Estándar en taller" checked> Estándar en Taller</label>
+                <label><input type="radio" name="tipoAtencion" value="Servicio Exprés"> Servicio Exprés</label>
+              </div>
+            </div>
+            <div class="campo">
+              <label>Puntos Adicionales</label>
+              <div class="opciones-inline">
+                <label><input type="checkbox" class="check-adicional" value="Luces"> Luces</label>
+                <label><input type="checkbox" class="check-adicional" value="Neumáticos"> Neumáticos</label>
+                <label><input type="checkbox" class="check-adicional" value="Batería"> Batería</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- FECHA Y OBSERVACIONES -->
+          <h3><i class="fa-solid fa-clock"></i> Turno y Observaciones</h3>
+          <div class="fila-formulario">
+            <div class="campo">
+              <label for="fecha-turno">Fecha Deseada *</label>
+              <input type="date" id="fecha-turno" required>
+            </div>
+            <div class="campo">
+              <label for="hora-turno">Hora (08:00 a 17:00) *</label>
+              <input type="time" id="hora-turno" min="08:00" max="17:00" required>
+            </div>
+            <div class="campo" style="grid-column: 1 / -1;">
+              <label for="observaciones">Observaciones o Síntomas</label>
+              <textarea id="observaciones" rows="3" placeholder="Detalle ruidos o fallas observadas..."></textarea>
+            </div>
+          </div>
+
+          <div class="botones">
+            <button type="reset" class="btn-limpiar" onclick="cancelarEdicion()">
+              <i class="fa-solid fa-eraser"></i> Limpiar
+            </button>
+            <button type="submit" id="btn-submit-solicitud" class="btn-enviar">
+              <i class="fa-solid fa-paper-plane"></i> Registrar Cita
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: MIS MANTENIMIENTOS (VISTA CLIENTE) -->
+    <section id="seccion-cliente" class="seccion-app oculto">
+      <div class="contenedor-seccion">
+        <h2><i class="fa-solid fa-clipboard-list" style="color: var(--color-acento);"></i> Mis Mantenimientos</h2>
+        <p class="subtitulo">Historial y estado actual de sus solicitudes de servicio:</p>
+        
+        <div class="tabla-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Vehículo (Placa / Modelo)</th>
+                <th>Servicio</th>
+                <th>Fecha y Hora</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-cliente-cuerpo">
+              <!-- Filas dinámicas -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 6: ADMINISTRACIÓN (CRUD COMPLETO) -->
+    <section id="seccion-admin" class="seccion-app oculto">
+      <div class="contenedor-seccion">
+        <h2><i class="fa-solid fa-shield-halved" style="color: var(--color-acento);"></i> Panel de Administración (CRUD)</h2>
+        <p class="subtitulo">Gestión global de solicitudes, control de estados y eliminación:</p>
+
+        <div style="margin-bottom: 15px;">
+          <input type="text" id="busqueda-admin" placeholder="Buscar por placa o cliente..." onkeyup="filtrarAdmin()" style="max-width: 320px;">
+        </div>
+
+        <div class="tabla-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Placa</th>
+                <th>Servicio</th>
+                <th>Fecha/Hora</th>
+                <th>Estado</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-admin-cuerpo">
+              <!-- Filas dinámicas -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- CONTROL DE USUARIOS DEL SISTEMA (HABILITAR / DESHABILITAR) -->
+        <h3 style="margin-top: 35px; margin-bottom: 10px;">
+          <i class="fa-solid fa-users-gear" style="color: var(--color-acento);"></i> Control de Cuentas de Usuarios (Habilitar / Deshabilitar)
+        </h3>
+        <p class="subtitulo">Gestión de acceso de los usuarios registrados en el sistema:</p>
+
+        <div class="tabla-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Usuario</th>
+                <th>Correo Electrónico</th>
+                <th>Rol</th>
+                <th>Estado de Cuenta</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-usuarios-cuerpo">
+              <!-- Filas dinámicas de usuarios -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 7: PERFIL DE USUARIO -->
+    <section id="seccion-perfil" class="seccion-app oculto">
+      <div class="contenedor-seccion" style="max-width: 500px; margin: auto;">
+        <h2><i class="fa-solid fa-id-card" style="color: var(--color-acento);"></i> Perfil de Usuario</h2>
+        <p><strong><i class="fa-solid fa-user"></i> Nombre:</strong> <span id="perfil-nombre"></span></p>
+        <p><strong><i class="fa-solid fa-envelope"></i> Correo:</strong> <span id="perfil-correo"></span></p>
+        <p><strong><i class="fa-solid fa-shield"></i> Rol:</strong> <span id="perfil-rol"></span></p>
+        <div class="botones">
+          <button class="btn-limpiar" onclick="mostrarSeccion('seccion-inicio')">
+            <i class="fa-solid fa-arrow-left"></i> Volver
+          </button>
+          <button class="btn-enviar" onclick="cerrarSesion()">
+            <i class="fa-solid fa-power-off"></i> Cerrar Sesión
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 8: INICIO DE SESIÓN -->
+    <section id="seccion-login" class="seccion-app oculto">
+      <div class="contenedor-seccion" style="max-width: 400px; margin: auto;">
+        <h2><i class="fa-solid fa-lock" style="color: var(--color-acento);"></i> Iniciar Sesión</h2>
+        <form id="formulario-login">
+          <div class="campo">
+            <label for="login-email"><i class="fa-solid fa-envelope"></i> Correo Electrónico</label>
+            <input type="email" id="login-email" placeholder="ejemplo@correo.com" required>
+          </div>
+          <div class="campo">
+            <label for="login-password"><i class="fa-solid fa-key"></i> Contraseña</label>
+            <input type="password" id="login-password" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn-enviar">
+            <i class="fa-solid fa-right-to-bracket"></i> Ingresar
+          </button>
+        </form>
+
+        <div style="margin-top: 15px; font-size: 12px; color: var(--color-acero);">
+          <p><strong><i class="fa-solid fa-circle-info"></i> Cuentas de prueba:</strong></p>
+          <p>Admin: admin@taller.com / admin123</p>
+          <p>Cliente: juan@correo.com / juan123</p>
+          <p>Inactiva: maria@correo.com / maria123</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer>
+    <p><i class="fa-solid fa-gears" style="color: var(--color-acento);"></i> &copy; 2026 Taller Magna - Unidad 1 Programación Web</p>
+  </footer>
+
+</body>
+</html>
